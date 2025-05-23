@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Laptop Recommendation Chatbot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #ffffff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #0077b6;
+      margin-bottom: 30px;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      border-radius: 8px;
+    }
+
+    .user {
+      background-color: #caf0f8;
+      text-align: left;
+    }
+
+    .bot {
+      background-color: #90e0ef;
+      text-align: left;
+    }
+
+    form {
+      display: flex;
+      margin-top: 20px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #023e8a;
+    }
+
+    .end-conv {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .end-conv button {
+      background-color: #e63946;
+    }
+
+    .end-conv button:hover {
+      background-color: #a4161a;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Laptop Recommendation Chatbot</h1>
+
+    <div>
+      {% for msg in name_xyz %}
+        {% if msg.user %}
+          <div class="message user"><b>User:</b> {{ msg.user }}</div>
+        {% endif %}
+        {% if msg.bot %}
+          <div class="message bot"><b>Bot:</b> {{ msg.bot }}</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <form action="{{ url_for('invite') }}" method="post">
+      <input type="text" name="user_input_message" placeholder="Ask me about laptops..." required>
+      <button type="submit">Send</button>
+    </form>
+
+    <div class="end-conv">
+      <form action="{{ url_for('end_conv') }}" method="post">
+        <button type="submit">End Conversation</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
